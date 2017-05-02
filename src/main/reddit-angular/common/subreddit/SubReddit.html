@@ -1,0 +1,9 @@
+<div>
+    <p>
+        <span ng-if="$ctrl.lastUpdated">Last updated at {{$ctrl.lastUpdated}}.</span> 
+        <a ng-if="!$ctrl.isFetching" href='#' ng-click="$ctrl.refreshSubReddit()">Refresh</a>
+    </p>
+    <h2 ng-if="$ctrl.isLoading">Loading...</h2>
+    <h2 ng-if="$ctrl.isEmpty">Empty.</h2>
+    <post-list posts="$ctrl.items"></post-list>
+</div>
