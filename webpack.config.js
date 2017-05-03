@@ -6,11 +6,16 @@ module.exports = {
     entry: {
         "bundle": "./src/main/index.ts"
     },
+
     output: {
         filename: "[name]-[hash].js",
         path: path.resolve(__dirname, "dist")
     },
+
     devtool: "inline-source-map",
+
+    stats: "minimal",
+
     resolve: {
         extensions: [
             ".tsx",
@@ -18,7 +23,7 @@ module.exports = {
             ".js"
         ]
     },
-    stats: "minimal",
+
     module: {
         rules: [
             {
@@ -49,21 +54,20 @@ module.exports = {
                     "html-loader?attrs[]=div:ng-include"
                 ],
                 exclude: /node_modules/
-            },
-
+            }
         ]
     },
+
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor", // Specify the common bundle's name.
+            name: "vendor",
             minChunks: function (module) {
-                // this assumes your vendor imports exist in the node_modules directory
                 return module.context && module.context.indexOf("node_modules") !== -1;
             }
         }),
         new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({
-            templateContent: "<app></app>"
+            template: "./src/main/index.ejs"
         })
     ],
 
