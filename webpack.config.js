@@ -22,6 +22,16 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.ts$/,
+                enforce: 'pre',
+                loader: 'tslint-loader',
+                options: {
+                    emitErrors: true,
+                    failOnHint: true,
+                    typeCheck: true,
+                }
+            },
+            {
                 test: /\.(js|ts|tsx)?$/,
                 loader: "ts-loader",
                 exclude: /node_modules/,
