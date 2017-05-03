@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -23,8 +23,8 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                enforce: 'pre',
-                loader: 'tslint-loader',
+                enforce: "pre",
+                loader: "tslint-loader",
                 options: {
                     emitErrors: true,
                     failOnHint: true,
@@ -55,10 +55,10 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor', // Specify the common bundle's name.
+            name: "vendor", // Specify the common bundle's name.
             minChunks: function (module) {
                 // this assumes your vendor imports exist in the node_modules directory
-                return module.context && module.context.indexOf('node_modules') !== -1;
+                return module.context && module.context.indexOf("node_modules") !== -1;
             }
         }),
         new webpack.NamedModulesPlugin(),
