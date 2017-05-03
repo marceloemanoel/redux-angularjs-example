@@ -7,14 +7,12 @@
     "start": "webpack-dev-server --colors --hot --inline --watch",
     "prebuild": "rm -rf dist/ && mkdir dist/",
     "build": "webpack --config webpack.config.prod.js --colors --progress",
-    "eslint": "eslint.js '**/*.js'",
     "tslint": "tslint --project tsconfig.json",
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "linters": {
-      "*.ts": "tslint",
-      "*.js": "eslint"
+      "*.{ts,js}": "tslint"
     }
   },
   "author": "",
