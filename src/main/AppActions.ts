@@ -2,19 +2,18 @@ import { Action } from "redux";
 import Post from "./common/Post";
 
 export const SELECT_SUBREDDIT = "SELECT_SUBREDDIT";
-export const INVALIDATE_SUBREDDIT = "INVALIDATE_SUBREDDIT";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const REQUEST_POSTS = "REQUEST_POSTS";
 
-export interface InvalidateSubRedditAction extends Action {
-    subReddit: string;
-}
+export class InvalidateSubRedditAction implements Action {
 
-export function invalidateSubReddit(subReddit: string): InvalidateSubRedditAction {
-    return {
-        type: INVALIDATE_SUBREDDIT,
-        subReddit
-    };
+    public readonly type = InvalidateSubRedditAction.name;
+
+    constructor(public subReddit: string) {}
+
+    asPlainObject(): Action {
+        return Object.assign({}, this);
+    }
 }
 
 export function receivePosts(posts: Post[], receivedAt: number, subReddit: string): ReceivePostsAction {
@@ -78,7 +77,7 @@ export interface ReceivePostsAction extends Action {
 
 export function fetchPostsIfNeeded(subreddit: string): Action {
     return {
-        type: ""
+        type: subreddit
     };
 //   return (dispatch, getState) => {
 //     if (shouldFetchPosts(getState(), subreddit)) {

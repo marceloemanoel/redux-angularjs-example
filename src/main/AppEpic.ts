@@ -1,8 +1,7 @@
 import * as actions from "./AppActions";
-import { Action, Store } from "redux";
-import { Observable } from "rxjs";
-import { Epic, ActionsObservable } from "redux-observable";
-import AppState from "./AppState";
+import {Action, Store} from "redux";
+import {Observable} from "rxjs";
+import {ActionsObservable, Epic} from "redux-observable";
 import State from "./store/State";
 
 const AppEpic: Epic<Action, State> =

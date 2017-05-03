@@ -36,7 +36,7 @@ export default class SubRedditController {
         return this.state.items;
     }
 
-    invalidateSubReddit(): void {
-        this.store.dispatch(actions.invalidateSubReddit(""));
+    refreshSubReddit(): void {
+        this.store.dispatch(new actions.InvalidateSubRedditAction("").asPlainObject());
     }
 }
