@@ -5,12 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --colors --hot --inline --watch",
-    "build": "webpack --colors --progress"
+    "build": "webpack --colors --progress",
+    "eslint": "eslint.js '**/*.js'",
+    "tslint": "tslint --project tsconfig.json",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.ts": "tslint",
+      "*.js": "eslint"
+    }
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/isomorphic-fetch": "0.0.34",
     "angular": "^1.6.4",
     "redux": "^3.6.0",
     "redux-observable": "^0.14.1",
@@ -21,6 +29,8 @@
     "@types/node": "^7.0.14",
     "html-loader": "^0.4.5",
     "html-webpack-plugin": "^2.28.0",
+    "husky": "^0.13.3",
+    "lint-staged": "^3.4.1",
     "ngtemplate-loader": "^1.3.1",
     "source-map-loader": "^0.2.1",
     "ts-loader": "^2.0.3",
