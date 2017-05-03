@@ -7,7 +7,7 @@ module.exports = {
         "bundle": "./src/main/index.ts"
     },
     output: {
-        filename: "[name].js",
+        filename: "[name]-[hash].js",
         path: path.resolve(__dirname, "dist")
     },
     devtool: "inline-source-map",
@@ -44,6 +44,13 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor', // Specify the common bundle's name.
+            minChunks: function (module) {
+                // this assumes your vendor imports exist in the node_modules directory
+                return module.context && module.context.indexOf('node_modules') !== -1;
+            }
+        }),
         new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({
             templateContent: "<app></app>"
