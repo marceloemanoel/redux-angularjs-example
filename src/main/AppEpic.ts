@@ -25,7 +25,7 @@ const AppEpic: Epic<Action, State> =
                                       .then((response: any) => response.json())
                                       .then((json: any) => {
                                           const posts = json.data.children.map((obj: any) => obj.data);
-                                          store.dispatch(actions.receivePosts(posts, Date.now(), subReddit))
+                                          store.dispatch(actions.receivePosts(posts, Date.now(), subReddit));
                                       })
                                       .catch((error: Error) => console.error(error));
 

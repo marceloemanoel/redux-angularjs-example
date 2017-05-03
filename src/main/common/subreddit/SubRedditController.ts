@@ -6,7 +6,7 @@ import Post from "../Post";
 
 export default class SubRedditController {
     static $inject: string[] = ["store"];
-    
+
     subReddit: string;
 
     constructor(private store: Store<State>) {

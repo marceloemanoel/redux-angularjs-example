@@ -10,4 +10,4 @@ export default angular
         ComponentsModule
     ])
     .component("reddit", SubRedditComponent)
-    .name
+    .name;

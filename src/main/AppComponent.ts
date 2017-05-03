@@ -6,6 +6,6 @@ const templateUrl: string = require("./App.html");
 const AppComponent: angular.IComponentOptions = {
     templateUrl,
     controller: AppController
-}
+};
 
 export default AppComponent;

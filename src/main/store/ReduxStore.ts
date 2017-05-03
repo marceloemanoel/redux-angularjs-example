@@ -5,7 +5,7 @@ import RootReducer from "./RootReducer";
 import RootEpics from "./RootEpics";
 
 interface Window {
-    [key:string]: any;
+    [key: string]: any;
 }
 const win: Window = window;
 const composeEnhancers = (

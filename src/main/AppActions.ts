@@ -1,13 +1,13 @@
 import { Action } from "redux";
 import Post from "./common/Post";
 
-export const SELECT_SUBREDDIT = 'SELECT_SUBREDDIT'
+export const SELECT_SUBREDDIT = "SELECT_SUBREDDIT";
 export const INVALIDATE_SUBREDDIT = "INVALIDATE_SUBREDDIT";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const REQUEST_POSTS = "REQUEST_POSTS";
 
 export interface InvalidateSubRedditAction extends Action {
-    subReddit: string
+    subReddit: string;
 }
 
 export function invalidateSubReddit(subReddit: string): InvalidateSubRedditAction {
@@ -23,7 +23,7 @@ export function receivePosts(posts: Post[], receivedAt: number, subReddit: strin
         subReddit,
         posts,
         receivedAt
-    }; 
+    };
 }
 
 export interface RequestPostsAction extends Action {
@@ -38,7 +38,7 @@ export function requestPosts(subReddit: string): RequestPostsAction {
 }
 
 export interface SelectSubRedditAction extends Action {
-    subReddit: string
+    subReddit: string;
 }
 
 export function selectSubReddit(subReddit: string): SelectSubRedditAction {

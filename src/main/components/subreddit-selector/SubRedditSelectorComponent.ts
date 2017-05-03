@@ -11,6 +11,6 @@ const SubRedditSelectorComponent: angular.IComponentOptions = {
         value: "@",
         onChange: "&"
     }
-}
+};
 
 export default SubRedditSelectorComponent;

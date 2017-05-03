@@ -4,4 +4,4 @@ import ReduxStore from "./ReduxStore";
 export default angular
     .module("redux-store", [])
     .constant("store", ReduxStore)
-    .name
+    .name;

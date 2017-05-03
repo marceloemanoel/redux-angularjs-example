@@ -7,4 +7,4 @@ export default angular
     .module("app.components", [])
     .component("postList", PostListComponent)
     .component("subRedditSelector", SubRedditSelectorComponent)
-    .name
+    .name;
