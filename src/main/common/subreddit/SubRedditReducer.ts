@@ -1,6 +1,5 @@
-import {Action} from "redux";
 import AbstractReducer from "../../store/AbstractReducer";
-import {InvalidateSubRedditAction, RECEIVE_POSTS, ReceivePostsAction, REQUEST_POSTS} from "../../AppActions";
+import {InvalidateSubRedditAction, ReceivePostsAction, RequestPostsAction} from "../../AppActions";
 import SubRedditState from "./SubRedditState";
 
 const initialState: SubRedditState = {
@@ -18,14 +17,14 @@ const PostReducer = new AbstractReducer(initialState, {
             didInvalidate: true
         };
     },
-    [REQUEST_POSTS]: (state: SubRedditState, action: Action) => {
+    [RequestPostsAction.name]: (state: SubRedditState, action: RequestPostsAction) => {
         return {
             ...state,
             isFetching: true,
             didInvalidate: false
         };
     },
-    [RECEIVE_POSTS]: (state: SubRedditState, action: ReceivePostsAction) => {
+    [ReceivePostsAction.name]: (state: SubRedditState, action: ReceivePostsAction) => {
         return {
             ...state,
             isFetching: false,

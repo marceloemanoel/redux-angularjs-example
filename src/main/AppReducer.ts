@@ -1,6 +1,6 @@
 import {Action, Reducer, combineReducers } from "redux";
 import AbstractReducer from "./store/AbstractReducer";
-import {SELECT_SUBREDDIT, SelectSubRedditAction} from "./AppActions";
+import {SelectSubRedditAction} from "./AppActions";
 import AppState from "./AppState";
 
 const initialState: AppState = {
@@ -13,7 +13,7 @@ const initialState: AppState = {
 };
 
 const AppReducer = new AbstractReducer(initialState, {
-    [SELECT_SUBREDDIT]: (state: AppState, action: SelectSubRedditAction) => {
+    [SelectSubRedditAction.name]: (state: AppState, action: SelectSubRedditAction) => {
         return {
             ...state,
             selectedSubReddit: action.subReddit

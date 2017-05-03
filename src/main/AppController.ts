@@ -1,5 +1,5 @@
-import * as actions from "./AppActions";
-import { Store, Dispatch } from "redux";
+import {SelectSubRedditAction} from "./AppActions";
+import {Dispatch, Store} from "redux";
 import State from "./store/State";
 import AppState from "./AppState";
 
@@ -10,7 +10,7 @@ export default class AppController {
 
     constructor(private store: Store<State>) {
         this.dispatch = store.dispatch;
-        this.dispatch(actions.fetchPostsIfNeeded(this.selectedSubReddit));
+        this.dispatch(new SelectSubRedditAction(this.selectedSubReddit).asPlainObject());
     }
 
     private get state(): AppState {
@@ -26,6 +26,6 @@ export default class AppController {
     }
 
     changeSubReddit = (subReddit: string): void => {
-        this.dispatch(actions.selectSubReddit(subReddit));
+        this.dispatch(new SelectSubRedditAction(subReddit).asPlainObject());
     }
 }
