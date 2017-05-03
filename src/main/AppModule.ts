@@ -9,10 +9,9 @@ export default angular
         ComponentsModule
     ])
     .component("app", ApplicationComponent)
-    .run((store: any, $rootScope: any) => {
+    .run(["store", "$rootScope", (store: any, $rootScope: any) => {
         store.subscribe(() => {
             $rootScope.$applyAsync();
         });
-    })
-
+    }])
     .name;
