@@ -3,36 +3,36 @@ import {InvalidateSubRedditAction, ReceivePostsAction, RequestPostsAction} from 
 import SubRedditState from "./SubRedditState";
 
 const initialState: SubRedditState = {
-    didInvalidate: false,
-    isFetching: false,
-    items: [],
-    lastUpdated: Date.now()
+  didInvalidate: false,
+  isFetching: false,
+  items: [],
+  lastUpdated: Date.now()
 };
 
 const PostReducer = new AbstractReducer(initialState, {
-    [InvalidateSubRedditAction.name]: (state: SubRedditState, action: InvalidateSubRedditAction) => {
-        debugger;
-        return {
-            ...state,
-            didInvalidate: true
-        };
-    },
-    [RequestPostsAction.name]: (state: SubRedditState, action: RequestPostsAction) => {
-        return {
-            ...state,
-            isFetching: true,
-            didInvalidate: false
-        };
-    },
-    [ReceivePostsAction.name]: (state: SubRedditState, action: ReceivePostsAction) => {
-        return {
-            ...state,
-            isFetching: false,
-            didInvalidate: false,
-            items: action.posts,
-            lastUpdated: action.receivedAt
-        };
-    }
+  [InvalidateSubRedditAction.name]: (state: SubRedditState, action: InvalidateSubRedditAction) => {
+    debugger;
+    return {
+      ...state,
+      didInvalidate: true
+    };
+  },
+  [RequestPostsAction.name]: (state: SubRedditState, action: RequestPostsAction) => {
+    return {
+      ...state,
+      isFetching: true,
+      didInvalidate: false
+    };
+  },
+  [ReceivePostsAction.name]: (state: SubRedditState, action: ReceivePostsAction) => {
+    return {
+      ...state,
+      isFetching: false,
+      didInvalidate: false,
+      items: action.posts,
+      lastUpdated: action.receivedAt
+    };
+  }
 }).reducer;
 
 export default PostReducer;

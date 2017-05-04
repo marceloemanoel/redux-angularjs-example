@@ -4,8 +4,8 @@ import SubRedditController from "./SubRedditController";
 const templateUrl: string = require("./SubReddit.html");
 
 const SubRedditComponent: angular.IComponentOptions = {
-    templateUrl,
-    controller: SubRedditController
+  templateUrl,
+  controller: SubRedditController
 };
 
 export default SubRedditComponent;

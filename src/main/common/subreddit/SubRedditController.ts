@@ -5,38 +5,39 @@ import SubRedditState from "./SubRedditState";
 import Post from "../Post";
 
 export default class SubRedditController {
-    static $inject: string[] = ["store"];
+  static $inject: string[] = ["store"];
 
-    subReddit: string;
+  subReddit: string;
 
-    constructor(private store: Store<State>) {
-        console.log("created");
-    }
+  constructor(private store: Store<State>) {
+    console.log("created");
+  }
 
-    private get state(): SubRedditState {
-        return this.store.getState().subReddit;
-    }
+  private get state(): SubRedditState {
+    return this.store.getState().subReddit;
+  }
 
-    get isFetching(): boolean {
-        return this.state.isFetching;
-    }
-    get isLoading(): boolean {
-       return this.state.isFetching && this.state.items.length === 0;
-    }
+  get isFetching(): boolean {
+    return this.state.isFetching;
+  }
 
-    get isEmpty(): boolean {
-        return !this.state.isFetching && this.state.items.length === 0;
-    }
+  get isLoading(): boolean {
+    return this.state.isFetching && this.state.items.length === 0;
+  }
 
-    get lastUpdated(): string {
-        return this.state.lastUpdated && new Date(this.state.lastUpdated).toLocaleTimeString();
-    }
+  get isEmpty(): boolean {
+    return !this.state.isFetching && this.state.items.length === 0;
+  }
 
-    get items(): Post[] {
-        return this.state.items;
-    }
+  get lastUpdated(): string {
+    return this.state.lastUpdated && new Date(this.state.lastUpdated).toLocaleTimeString();
+  }
 
-    refreshSubReddit(): void {
-        this.store.dispatch(new actions.InvalidateSubRedditAction("").asPlainObject());
-    }
+  get items(): Post[] {
+    return this.state.items;
+  }
+
+  refreshSubReddit(): void {
+    this.store.dispatch(new actions.InvalidateSubRedditAction("").asPlainObject());
+  }
 }

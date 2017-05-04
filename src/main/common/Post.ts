@@ -1,5 +1,5 @@
 interface Post {
-    title: string
+  title: string;
 }
 
 export default Post;

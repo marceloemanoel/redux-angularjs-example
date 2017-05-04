@@ -4,14 +4,14 @@ import ComponentsModule from "./components/ComponentsModule";
 import ApplicationComponent from "./AppComponent";
 
 export default angular
-    .module("app", [
-        CommonModule,
-        ComponentsModule
-    ])
-    .component("app", ApplicationComponent)
-    .run(["store", "$rootScope", (store: any, $rootScope: any) => {
-        store.subscribe(() => {
-            $rootScope.$applyAsync();
-        });
-    }])
-    .name;
+  .module("app", [
+    CommonModule,
+    ComponentsModule
+  ])
+  .component("app", ApplicationComponent)
+  .run(["store", "$rootScope", (store: any, $rootScope: any) => {
+    store.subscribe(() => {
+      $rootScope.$applyAsync();
+    });
+  }])
+  .name;

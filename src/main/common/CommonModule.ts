@@ -5,9 +5,9 @@ import SubRedditComponent from "./subreddit/SubRedditComponent";
 import ComponentsModule from "../components/ComponentsModule";
 
 export default angular
-    .module("app.common", [
-        ReduxStoreModule,
-        ComponentsModule
-    ])
-    .component("reddit", SubRedditComponent)
-    .name;
+  .module("app.common", [
+    ReduxStoreModule,
+    ComponentsModule
+  ])
+  .component("reddit", SubRedditComponent)
+  .name;
