@@ -5,7 +5,10 @@ const templateUrl: string = require("./SubReddit.html");
 
 const SubRedditComponent: angular.IComponentOptions = {
   templateUrl,
-  controller: SubRedditController
+  controller: SubRedditController,
+  bindings: {
+    subReddit: "<"
+  }
 };
 
 export default SubRedditComponent;

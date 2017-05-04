@@ -37,7 +37,10 @@ export default class SubRedditController {
     return this.state.items;
   }
 
-  refreshSubReddit(): void {
-    this.store.dispatch(new actions.InvalidateSubRedditAction("").asPlainObject());
+  refreshSubReddit($event: Event): void {
+    $event.preventDefault();
+    $event.stopImmediatePropagation();
+
+    this.store.dispatch(new actions.InvalidateSubRedditAction(this.subReddit).asPlainObject());
   }
 }
