@@ -10,14 +10,13 @@ const initialState: SubRedditState = {
 };
 
 const PostReducer = new AbstractReducer(initialState, {
-  [InvalidateSubRedditAction.name]: (state: SubRedditState, action: InvalidateSubRedditAction) => {
-    debugger;
+  [InvalidateSubRedditAction.name]: (state: SubRedditState) => {
     return {
       ...state,
       didInvalidate: true
     };
   },
-  [RequestPostsAction.name]: (state: SubRedditState, action: RequestPostsAction) => {
+  [RequestPostsAction.name]: (state: SubRedditState) => {
     return {
       ...state,
       isFetching: true,
