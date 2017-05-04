@@ -1,35 +1,41 @@
-import {ReceivePostsAction, RequestPostsAction, SelectSubRedditAction} from "./AppActions";
+import {InvalidateSubRedditAction, ReceivePostsAction, RequestPostsAction, SelectSubRedditAction} from "./AppActions";
 import {Action, Store} from "redux";
 import {Observable} from "rxjs";
 import {ActionsObservable, Epic} from "redux-observable";
 import State from "./store/State";
 
+function shouldLoadReddit(store: Store<State>): (action: Action) => boolean {
+  return (action: SelectSubRedditAction) => {
+    const state = store.getState();
+    const subReddit = state.app.subReddits[action.subReddit];
+
+    return (!subReddit || !subReddit.isFetching || subReddit.didInvalidate);
+  };
+}
+
+function toReceiveAction(subReddit: string): (response: Response) => Action {
+  return (json: any) => {
+    const posts = json.data.children.map((obj: any) => obj.data);
+    return new ReceivePostsAction(posts, Date.now(), subReddit).asPlainObject();
+  };
+}
+
+const loadSubReddit = (action: SelectSubRedditAction) => {
+  const subRedditUrl = `https://www.reddit.com/r/${action.subReddit}.json`;
+
+  const request = new RequestPostsAction(action.subReddit).asPlainObject();
+  const response$ = Observable.fromPromise(fetch(subRedditUrl))
+    .flatMap((response: Response) => Observable.fromPromise(response.json()))
+    .map(toReceiveAction(action.subReddit));
+
+  return Observable.of(request).concat(response$);
+};
+
 const AppEpic: Epic<Action, State> =
   (action$: ActionsObservable<Action>, store: Store<State>): Observable<Action> => {
-    return action$.ofType(SelectSubRedditAction.name)
-      .filter((action: SelectSubRedditAction) => {
-        const state = store.getState();
-        //   const subReddit = state.subReddits[action.subReddit];
-        //   if (!subReddit) {
-        return true;
-        //   }
-        //   else if (subReddit.isFetching) {
-        // return false;
-        //   }
-        //   return subReddit.didInvalidate;
-      })
-      .mergeMap((action: SelectSubRedditAction) => {
-        const subReddit = action.subReddit;
-        fetch(`https://www.reddit.com/r/${subReddit}.json`)
-          .then((response: any) => response.json())
-          .then((json: any) => {
-            const posts = json.data.children.map((obj: any) => obj.data);
-            store.dispatch(new ReceivePostsAction(posts, Date.now(), subReddit).asPlainObject());
-          })
-          .catch((error: Error) => console.error(error));
-
-        return Observable.of(new RequestPostsAction(subReddit).asPlainObject());
-      });
+    return action$.ofType(SelectSubRedditAction.name, InvalidateSubRedditAction.name)
+      .filter(shouldLoadReddit(store))
+      .mergeMap(loadSubReddit);
   };
 
 export default AppEpic;
