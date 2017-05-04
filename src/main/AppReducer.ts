@@ -1,5 +1,6 @@
 import AbstractReducer from "./store/AbstractReducer";
-import {SelectSubRedditAction} from "./AppActions";
+import SubRedditReducer from "./common/subreddit/SubRedditReducer";
+import {BaseAction, InvalidateSubRedditAction, ReceivePostsAction, RequestPostsAction, SelectSubRedditAction} from "./AppActions";
 import AppState from "./AppState";
 
 const initialState: AppState = {
@@ -9,6 +10,17 @@ const initialState: AppState = {
     "scala"
   ],
   selectedSubReddit: "reactjs",
+  subReddits: {}
+};
+
+const subRedditAction = (state: AppState, action: BaseAction) => {
+  return {
+    ...state,
+    subReddits: {
+      ...state.subReddits,
+      [action.subReddit]: SubRedditReducer(state.subReddits[action.subReddit], action)
+    }
+  };
 };
 
 const AppReducer = new AbstractReducer(initialState, {
@@ -18,6 +30,9 @@ const AppReducer = new AbstractReducer(initialState, {
       selectedSubReddit: action.subReddit
     };
   },
+  [InvalidateSubRedditAction.name]: subRedditAction,
+  [RequestPostsAction.name]: subRedditAction,
+  [ReceivePostsAction.name]: subRedditAction
 }).reducer;
 
 export default AppReducer;

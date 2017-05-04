@@ -14,7 +14,9 @@ export default class SubRedditController {
   }
 
   private get state(): SubRedditState {
-    return this.store.getState().subReddit;
+    const state = this.store.getState();
+    const appState = state.app;
+    return appState.subReddits[this.subReddit];
   }
 
   get isFetching(): boolean {
