@@ -1,6 +1,8 @@
 import {applyMiddleware, compose, createStore} from "redux";
 import {createEpicMiddleware} from "redux-observable";
 
+import typeScriptActions from "./TypescriptActionMiddleware";
+
 import RootReducer from "./RootReducer";
 import RootEpics from "./RootEpics";
 
@@ -15,7 +17,7 @@ const composeEnhancers = (
 );
 
 const enhancer = composeEnhancers(
-  applyMiddleware(createEpicMiddleware(RootEpics))
+  applyMiddleware(createEpicMiddleware(RootEpics), typeScriptActions)
 );
 
 const initialState = {};

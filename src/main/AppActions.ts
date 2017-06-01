@@ -1,16 +1,12 @@
-import {Action} from "redux";
+import AbstractActionCreator from "./store/AbstractActionCreator";
 import Post from "./common/Post";
 
-export abstract class BaseAction implements Action {
+export class BaseAction extends AbstractActionCreator {
   constructor(public readonly type: string,
               public readonly subReddit: string) {
-  }
-
-  public asPlainObject(): Action {
-    return Object.assign({}, this);
+    super(type);
   }
 }
-
 export class InvalidateSubRedditAction extends BaseAction {
   constructor(subReddit: string) {
     super(InvalidateSubRedditAction.name, subReddit);

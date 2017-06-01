@@ -1,4 +1,4 @@
-import AbstractReducer from "./store/AbstractReducer";
+import {abstractReducer} from "./store/AbstractReducer";
 import SubRedditReducer from "./common/subreddit/SubRedditReducer";
 import {BaseAction, InvalidateSubRedditAction, ReceivePostsAction, RequestPostsAction, SelectSubRedditAction} from "./AppActions";
 import AppState from "./AppState";
@@ -23,7 +23,7 @@ const subRedditAction = (state: AppState, action: BaseAction) => {
   };
 };
 
-const AppReducer = new AbstractReducer(initialState, {
+const AppReducer = abstractReducer(initialState, {
   [SelectSubRedditAction.name]: (state: AppState, action: SelectSubRedditAction) => {
     return {
       ...state,
@@ -33,6 +33,6 @@ const AppReducer = new AbstractReducer(initialState, {
   [InvalidateSubRedditAction.name]: subRedditAction,
   [RequestPostsAction.name]: subRedditAction,
   [ReceivePostsAction.name]: subRedditAction
-}).reducer;
+});
 
 export default AppReducer;

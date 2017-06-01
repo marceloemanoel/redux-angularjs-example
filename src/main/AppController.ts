@@ -10,7 +10,7 @@ export default class AppController {
 
   constructor(private store: Store<State>) {
     this.dispatch = store.dispatch;
-    this.dispatch(new SelectSubRedditAction(this.selectedSubReddit).asPlainObject());
+    this.dispatch(new SelectSubRedditAction(this.selectedSubReddit));
   }
 
   private get state(): AppState {
@@ -26,6 +26,6 @@ export default class AppController {
   }
 
   changeSubReddit = (subReddit: string): void => {
-    this.dispatch(new SelectSubRedditAction(subReddit).asPlainObject());
+    this.dispatch(new SelectSubRedditAction(subReddit));
   }
 }

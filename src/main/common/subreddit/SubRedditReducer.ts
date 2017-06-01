@@ -1,4 +1,4 @@
-import AbstractReducer from "../../store/AbstractReducer";
+import {abstractReducer} from "../../store/AbstractReducer";
 import {InvalidateSubRedditAction, ReceivePostsAction, RequestPostsAction} from "../../AppActions";
 import SubRedditState from "./SubRedditState";
 
@@ -9,7 +9,7 @@ const initialState: SubRedditState = {
   lastUpdated: Date.now()
 };
 
-const PostReducer = new AbstractReducer(initialState, {
+const PostReducer = abstractReducer(initialState, {
   [InvalidateSubRedditAction.name]: (state: SubRedditState) => {
     return {
       ...state,
@@ -32,6 +32,6 @@ const PostReducer = new AbstractReducer(initialState, {
       lastUpdated: action.receivedAt
     };
   }
-}).reducer;
+});
 
 export default PostReducer;

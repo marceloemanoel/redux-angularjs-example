@@ -16,14 +16,14 @@ function shouldLoadReddit(store: Store<State>): (action: Action) => boolean {
 function toReceiveAction(subReddit: string): (response: Response) => Action {
   return (json: any) => {
     const posts = json.data.children.map((obj: any) => obj.data);
-    return new ReceivePostsAction(posts, Date.now(), subReddit).asPlainObject();
+    return new ReceivePostsAction(posts, Date.now(), subReddit);
   };
 }
 
 const loadSubReddit = (action: SelectSubRedditAction) => {
   const subRedditUrl = `https://www.reddit.com/r/${action.subReddit}.json`;
 
-  const request = new RequestPostsAction(action.subReddit).asPlainObject();
+  const request = new RequestPostsAction(action.subReddit);
   const response$ = Observable.fromPromise(fetch(subRedditUrl))
     .flatMap((response: Response) => Observable.fromPromise(response.json()))
     .map(toReceiveAction(action.subReddit));

@@ -43,6 +43,6 @@ export default class SubRedditController {
     $event.preventDefault();
     $event.stopImmediatePropagation();
 
-    this.store.dispatch(new actions.InvalidateSubRedditAction(this.subReddit).asPlainObject());
+    this.store.dispatch(new actions.InvalidateSubRedditAction(this.subReddit));
   }
 }
